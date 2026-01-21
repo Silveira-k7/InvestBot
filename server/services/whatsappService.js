@@ -319,6 +319,18 @@ Como posso te ajudar agora? 🚀`;
       case 'goal':
         return await this.handleGoalCommand(user, messageText, dbService);
       
+      case 'analysis':
+        return await this.handleAnalysisRequest(user, aiService, dbService);
+      
+      case 'prediction':
+        return await this.handlePredictionRequest(user, aiService, dbService);
+      
+      case 'suggestions':
+        return await this.handleSuggestionsRequest(user, aiService, dbService);
+      
+      case 'comparison':
+        return await this.handleComparisonRequest(user, messageText, aiService, dbService);
+      
       default:
         return await this.handleGeneralQuery(user, messageText, aiService, dbService);
     }
@@ -680,4 +692,117 @@ Por enquanto, acesse: https://investbot.app/goals
       uptime: Math.floor((Date.now() - this.startTime) / 1000)
     };
   }
+
+  // Novo: Handler para análise de padrões
+  async handleAnalysisRequest(user, aiService, dbService) {
+    try {
+      const analysis = await aiService.analyzeSpendingPatterns(user, dbService);
+      
+      if (!analysis.hasEnoughData) {
+        return `📊 *Análise de Padrões*\n\n${analysis.message}\n\n🤖 Continue registrando suas transações!`;
+      }
+
+      return analysis.message;
+    } catch (error) {
+      console.error('Erro ao processar análise:', error);
+      return '❌ Erro ao gerar análise. Tente novamente.';
+    }
+  }
+
+  // Novo: Handler para previsões
+  async handlePredictionRequest(user, aiService, dbService) {
+    try {
+      const prediction = await aiService.predictFutureExpenses(user, dbService);
+      
+      if (!prediction.hasEnoughData) {
+        return `🔮 *Previsão de Gastos*\n\n${prediction.message}\n\n💡 Continue usando o InvestBot para previsões mais precisas!`;
+      }
+
+      return prediction.message;
+    } catch (error) {
+      console.error('Erro ao processar previsão:', error);
+      return '❌ Erro ao gerar previsão. Tente novamente.';
+    }
+  }
+
+  // Novo: Handler para sugestões personalizadas
+  async handleSuggestionsRequest(user, aiService, dbService) {
+    try {
+      const suggestions = await aiService.generateSmartSuggestions(user, dbService);
+      
+      if (suggestions.length === 0) {
+        return `💡 *Sugestões Personalizadas*\n\nParece que você está gerenciando bem suas finanças! Continue assim! 🎉\n\n🤖 *InvestBot - Sempre com você! 24h/dia*`;
+      }
+
+      let message = `💡 *Sugestões Personalizadas para ${user.name.split(' ')[0]}*\n\n`;
+      suggestions.forEach((suggestion, index) => {
+        message += `${index + 1}. ${suggestion.message}\n\n`;
+      });
+
+      message += '🤖 *InvestBot - Seu assistente financeiro inteligente! 24h/dia*';
+      return message;
+    } catch (error) {
+      console.error('Erro ao processar sugestões:', error);
+      return '❌ Erro ao gerar sugestões. Tente novamente.';
+    }
+  }
+
+  // Novo: Handler para comparação entre períodos
+  async handleComparisonRequest(user, messageText, aiService, dbService) {
+    try {
+      const now = new Date();
+      const currentMonthStart = new Date(now.getFullYear(), now.getMonth(), 1);
+      const currentMonthEnd = new Date(now.getFullYear(), now.getMonth() + 1, 0);
+      
+      const lastMonthStart = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+      const lastMonthEnd = new Date(now.getFullYear(), now.getMonth(), 0);
+
+      const currentMonth = await dbService.getTransactionsByPeriod(user.id, currentMonthStart, currentMonthEnd);
+      const lastMonth = await dbService.getTransactionsByPeriod(user.id, lastMonthStart, lastMonthEnd);
+
+      const currentExpenses = currentMonth.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+      const lastExpenses = lastMonth.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+      
+      const currentIncome = currentMonth.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+      const lastIncome = lastMonth.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+
+      const expenseDiff = currentExpenses - lastExpenses;
+      const incomeDiff = currentIncome - lastIncome;
+      const expensePercent = lastExpenses > 0 ? ((expenseDiff / lastExpenses) * 100) : 0;
+      const incomePercent = lastIncome > 0 ? ((incomeDiff / lastIncome) * 100) : 0;
+
+      let message = `📊 *Comparação: Mês Atual vs Mês Passado*\n\n`;
+      
+      message += `💸 *Gastos:*\n`;
+      message += `• Mês atual: R$ ${currentExpenses.toFixed(2)}\n`;
+      message += `• Mês passado: R$ ${lastExpenses.toFixed(2)}\n`;
+      if (expenseDiff > 0) {
+        message += `📈 Aumento de R$ ${expenseDiff.toFixed(2)} (${expensePercent.toFixed(1)}%)\n\n`;
+      } else if (expenseDiff < 0) {
+        message += `📉 Redução de R$ ${Math.abs(expenseDiff).toFixed(2)} (${Math.abs(expensePercent).toFixed(1)}%) ✅\n\n`;
+      } else {
+        message += `➡️ Mesmos gastos\n\n`;
+      }
+
+      message += `💰 *Receitas:*\n`;
+      message += `• Mês atual: R$ ${currentIncome.toFixed(2)}\n`;
+      message += `• Mês passado: R$ ${lastIncome.toFixed(2)}\n`;
+      if (incomeDiff > 0) {
+        message += `📈 Aumento de R$ ${incomeDiff.toFixed(2)} (${incomePercent.toFixed(1)}%) ✅\n`;
+      } else if (incomeDiff < 0) {
+        message += `📉 Redução de R$ ${Math.abs(incomeDiff).toFixed(2)} (${Math.abs(incomePercent).toFixed(1)}%)\n`;
+      } else {
+        message += `➡️ Mesma receita\n`;
+      }
+
+      message += `\n🤖 *InvestBot - Sempre aqui! 24h/dia*`;
+      return message;
+
+    } catch (error) {
+      console.error('Erro ao processar comparação:', error);
+      return '❌ Erro ao gerar comparação. Tente novamente.';
+    }
+  }
 }
+
+export { WhatsAppService };

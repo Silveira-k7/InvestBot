@@ -2,6 +2,30 @@
 
 Um sistema completo de gestão financeira pessoal que integra **Dashboard Web** e **Chatbot WhatsApp com Inteligência Artificial** disponível **24 horas por dia**.
 
+## ⭐ NOVIDADES - Versão 2.0
+
+### 🚀 Melhorias Recentes Implementadas:
+
+#### 🧠 IA Avançada
+- ✅ **Análise de Padrões** - Identifica tendências nos seus gastos
+- ✅ **Previsão de Gastos** - Prevê gastos futuros baseado em histórico
+- ✅ **Detecção de Anomalias** - Detecta gastos incomuns automaticamente
+- ✅ **Sugestões Personalizadas** - Recomendações específicas para você
+- ✅ **Comparação de Períodos** - Compare mês atual com anterior
+
+#### 🔐 Sistema Unificado
+- ✅ **Autenticação JWT** - Sistema seguro de login
+- ✅ **Integração Web + WhatsApp** - Uma conta, dois mundos
+- ✅ **Sincronização Automática** - Dados sempre atualizados
+- ✅ **Vinculação de Contas** - Conecte WhatsApp com conta web
+
+#### 📢 Notificações Inteligentes
+- ✅ **Relatórios Diários** - Todo dia às 9h
+- ✅ **Relatórios Semanais** - Domingos às 20h
+- ✅ **Alertas de Gastos** - Em tempo real
+- ✅ **Lembretes de Metas** - Acompanhamento diário às 18h
+- ✅ **Análise Mensal** - Primeiro dia do mês às 10h
+
 ## 🚀 Funcionalidades
 
 ### 📊 Dashboard Web
@@ -72,6 +96,8 @@ Um sistema completo de gestão financeira pessoal que integra **Dashboard Web** 
 - **OpenAI API** para IA (opcional)
 - **Puppeteer** para automação
 - **Node-cron** para tarefas agendadas
+- **JWT** para autenticação
+- **Bcrypt** para criptografia
 
 ### Banco de Dados
 - Sistema de arquivos JSON (demo)
@@ -384,6 +410,39 @@ O bot possui sistema completo de monitoramento:
 - **Logs detalhados** de todas operações
 - **Alertas** para administrador
 - **Estatísticas** de uso em tempo real
+
+## 📚 Documentação Adicional
+
+Para informações detalhadas, consulte:
+
+- **[INSTALACAO.md](INSTALACAO.md)** - Guia completo de instalação passo a passo
+- **[COMANDOS_IA.md](COMANDOS_IA.md)** - Todos os comandos disponíveis e como usar
+- **[MELHORIAS.md](MELHORIAS.md)** - Detalhes técnicos de todas as melhorias implementadas
+- **[EXEMPLOS.md](EXEMPLOS.md)** - Exemplos práticos de conversas e uso real
+
+### 🎯 Links Rápidos
+
+- **Começar agora:** Leia [INSTALACAO.md](INSTALACAO.md)
+- **Aprender comandos:** Veja [COMANDOS_IA.md](COMANDOS_IA.md)
+- **Ver exemplos:** Confira [EXEMPLOS.md](EXEMPLOS.md)
+- **Entender melhorias:** Leia [MELHORIAS.md](MELHORIAS.md)
+
+## 🆕 Changelog
+
+### Versão 2.0 (Janeiro 2026)
+- ✅ Sistema de IA avançada com 5 novos recursos
+- ✅ Autenticação unificada Web + WhatsApp
+- ✅ Sistema de notificações inteligentes
+- ✅ 4 novos comandos avançados
+- ✅ Detecção de anomalias
+- ✅ Previsões de gastos futuros
+- ✅ Sugestões personalizadas
+
+### Versão 1.0 (Dezembro 2025)
+- ✅ Dashboard web completo
+- ✅ Bot WhatsApp 24h
+- ✅ Sistema de metas
+- ✅ Relatórios automáticos
 
 ---
 

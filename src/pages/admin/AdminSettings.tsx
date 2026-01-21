@@ -32,7 +32,7 @@ export const AdminSettings: React.FC = () => {
     whatsappSessionTimeout: 30,
     
     // AI Settings
-    openaiApiKey: '',
+    geminiApiKey: '',
     aiEnabled: true,
     aiResponseDelay: 2,
     
@@ -190,10 +190,10 @@ export const AdminSettings: React.FC = () => {
           <div className="space-y-4">
             <Input
               type="password"
-              label="OpenAI API Key"
-              value={settings.openaiApiKey}
-              onChange={(e) => handleInputChange('openaiApiKey', e.target.value)}
-              placeholder="sk-..."
+              label="Gemini API Key"
+              value={settings.geminiApiKey}
+              onChange={(e) => handleInputChange('geminiApiKey', e.target.value)}
+              placeholder="AIza..."
             />
             
             <div className="flex items-center justify-between">

@@ -5,8 +5,10 @@ import cron from 'node-cron';
 import { WhatsAppService } from './services/whatsappService.js';
 import { AIService } from './services/aiService.js';
 import { DatabaseService } from './services/databaseService.js';
+import NotificationService from './services/notificationService.js';
 import { webhookRoutes } from './routes/webhook.js';
 import { whatsappRoutes } from './routes/whatsapp.js';
+import authRoutes from './routes/auth.js';
 
 const app = express();
 const PORT = process.env.PORT || 3001;
@@ -20,6 +22,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const whatsappService = new WhatsAppService();
 const aiService = new AIService();
 const dbService = new DatabaseService();
+let notificationService = null;
 
 // Função para inicializar serviços
 async function initializeServices() {
@@ -38,6 +41,11 @@ async function initializeServices() {
     await whatsappService.keepAlive();
     console.log('✅ Sistema de manutenção 24h ativado');
     
+    // Inicializar sistema de notificações inteligentes
+    notificationService = new NotificationService(whatsappService, aiService, dbService);
+    notificationService.initialize();
+    console.log('✅ Notification Service inicializado');
+    
   } catch (error) {
     console.error('❌ Erro ao inicializar serviços:', error);
     
@@ -49,6 +57,7 @@ async function initializeServices() {
 // Routes
 app.use('/webhook', webhookRoutes(whatsappService, aiService, dbService));
 app.use('/api/whatsapp', whatsappRoutes(whatsappService, dbService));
+app.use('/api/auth', authRoutes);
 
 // Health check melhorado
 app.get('/health', (req, res) => {

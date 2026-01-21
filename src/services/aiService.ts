@@ -1,21 +1,9 @@
-import OpenAI from 'openai';
 import { Transaction, Goal, User } from '../types';
 
-// Mock OpenAI service for demo purposes
-// In production, you would use actual OpenAI API key
+// Mock Gemini-facing service for demo purposes
+// Em produção, delegue chamadas ao backend para manter a chave segura
 class AIService {
-  private openai: OpenAI | null = null;
-
-  constructor() {
-    // Initialize OpenAI only if API key is available
-    const apiKey = import.meta.env.VITE_OPENAI_API_KEY;
-    if (apiKey) {
-      this.openai = new OpenAI({
-        apiKey,
-        dangerouslyAllowBrowser: true // Only for demo - use backend in production
-      });
-    }
-  }
+  constructor() {}
 
   // Analyze spending patterns and provide insights
   async analyzeSpendingPatterns(transactions: Transaction[]): Promise<{

@@ -80,6 +80,20 @@ export class DatabaseService {
     return this.users.filter(user => user.isActive);
   }
 
+  async getUserByEmail(email) {
+    return this.users.find(user => user.email === email);
+  }
+
+  async updateUser(userId, updates) {
+    const userIndex = this.users.findIndex(u => u.id === userId);
+    if (userIndex !== -1) {
+      this.users[userIndex] = { ...this.users[userIndex], ...updates };
+      await this.saveData();
+      return this.users[userIndex];
+    }
+    return null;
+  }
+
   // Transaction methods
   async createTransaction(transactionData) {
     const transaction = {
