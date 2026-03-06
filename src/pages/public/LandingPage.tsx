@@ -1,11 +1,11 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Bot, 
-  TrendingUp, 
-  Shield, 
-  Smartphone, 
-  BarChart3, 
+import {
+  Bot,
+  TrendingUp,
+  Shield,
+  Smartphone,
+  BarChart3,
   Brain,
   MessageSquare,
   Target,
@@ -14,7 +14,11 @@ import {
   CheckCircle,
   Users,
   Clock,
-  Zap
+  Zap,
+  Wallet,
+  Compass,
+  Heart,
+  Lock
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '../../components/ui/Button';
@@ -226,6 +230,134 @@ export const LandingPage: React.FC = () => {
                 <div className="text-gray-600">{stat.label}</div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Pillars Section */}
+      <section className="py-20 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Os 4 Pilares da Sua Saúde Financeira
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Construa uma base sólida com finanças claras, metas estruturadas, liberdade financeira e controle total
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0 }}
+              className="group"
+            >
+              <div className="bg-gradient-to-br from-blue-50 to-blue-100 rounded-2xl p-8 h-full hover:shadow-xl transition-all duration-300">
+                <div className="w-14 h-14 bg-blue-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Wallet className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Finanças Claras</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Análise de gastos em tempo real</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Previsões inteligentes</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-blue-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Relatórios detalhados</span>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 }}
+              className="group"
+            >
+              <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-2xl p-8 h-full hover:shadow-xl transition-all duration-300">
+                <div className="w-14 h-14 bg-green-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Target className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Metas Estruturadas</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Metas personalizadas</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Alertas automáticos</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-green-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Recomendações com IA</span>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.2 }}
+              className="group"
+            >
+              <div className="bg-gradient-to-br from-purple-50 to-purple-100 rounded-2xl p-8 h-full hover:shadow-xl transition-all duration-300">
+                <div className="w-14 h-14 bg-purple-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Heart className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Liberdade Financeira</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-purple-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Índice de liberdade</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-purple-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Planejamento de aposentadoria</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-purple-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Projeções de futuro</span>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.3 }}
+              className="group"
+            >
+              <div className="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-8 h-full hover:shadow-xl transition-all duration-300">
+                <div className="w-14 h-14 bg-red-600 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                  <Lock className="w-7 h-7 text-white" />
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">Controle Total</h3>
+                <ul className="space-y-3 text-gray-700">
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-red-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Criptografia de ponta</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-red-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Segurança bancária</span>
+                  </li>
+                  <li className="flex items-start">
+                    <CheckCircle size={18} className="text-red-600 mr-2 mt-0.5 flex-shrink-0" />
+                    <span>Controle dos dados</span>
+                  </li>
+                </ul>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
